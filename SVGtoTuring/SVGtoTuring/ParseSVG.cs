@@ -381,12 +381,12 @@ namespace SVGtoTuring
 
         static string drawBox(int x1, int y1, int x2, int y2, string c)
         {
-            return "";
+            return string.Format("drawbox({0}, {1}, {2}, {3}, {4}", x1, y1, x2, y2, c);
         }
 
         static string drawFillBox(int x1, int y1, int x2, int y2, string c)
         {
-            return "";
+            return string.Format("drawfillbox({0}, {1}, {2}, {3}, {4}", x1, y1, x2, y2, c);
         }
 
         static string drawOval(int x, int y, int rx, int ry, string c)
