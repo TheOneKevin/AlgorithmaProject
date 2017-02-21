@@ -3,3 +3,4 @@ This is a collection of small, neat programs that does weird and wacky things. H
 1. The Library Of Babel (MSBuild)  
 2. Pi Approximator (DotNetCore)  
 3. (Incomplete) TicTacToe AI  
+4. SVG to Turing  
