@@ -43,7 +43,7 @@ namespace SVGtoTuring
         static int gW = 0; //Global width
         static string[] turingColors = new string[]
         {
-            "gray",
+            /*"gray",
             "red",
             "orange",
             "brown",
@@ -56,7 +56,8 @@ namespace SVGtoTuring
             "blue",
             "violet",
             "magenta",
-            "pink"
+            "pink"*/
+			""
         };
 
         #endregion
@@ -371,37 +372,77 @@ namespace SVGtoTuring
 
         #region Turing Drawing Methods
 
-        static string drawLine(int x1, int y1, int x2, int y2, int thick, string c)
+        static string drawLine(long x1, long y1, long x2, long y2, int thick, string c)
         {
+            if (Math.Abs(x1) >= int.MaxValue) x1 = x1 / 10;
+            if (Math.Abs(y1) >= int.MaxValue) y1 = y1 / 10;
+            if (Math.Abs(x2) >= int.MaxValue) x2 = x2 / 10;
+            if (Math.Abs(y2) >= int.MaxValue) y2 = y2 / 10;
+            
             if (thick == 1)
                 return string.Format("drawline({0}, {1}, {2}, {3}, {4})", x1, gH - y1, x2, gH - y2, c);
             else
                 return string.Format("Draw.ThickLine({0}, {1}, {2}, {3}, {4}, {5})", x1, gH - y1, x2, gH - y2, thick, c);
         }
 
-        static string drawBox(int x1, int y1, int x2, int y2, string c)
+        static string drawBox(long x1, long y1, long x2, long y2, string c)
         {
-            return string.Format("drawbox({0}, {1}, {2}, {3}, {4}", x1, y1, x2, y2, c);
+            if (Math.Abs(x1) >= int.MaxValue) x1 = x1 / 10;
+            if (Math.Abs(y1) >= int.MaxValue) y1 = y1 / 10;
+            if (Math.Abs(x2) >= int.MaxValue) x2 = x2 / 10;
+            if (Math.Abs(y2) >= int.MaxValue) y2 = y2 / 10;
+			
+			if((x1 != x2) || (y1 != y2))
+				return string.Format("drawbox({0}, {1}, {2}, {3}, {4})", x1, y1, x2, y2, c);
+			else
+				return "";
         }
 
-        static string drawFillBox(int x1, int y1, int x2, int y2, string c)
+        static string drawFillBox(long x1, long y1, long x2, long y2, string c)
         {
-            return string.Format("drawfillbox({0}, {1}, {2}, {3}, {4}", x1, y1, x2, y2, c);
+            if (Math.Abs(x1) >= int.MaxValue) x1 = x1 / 10;
+            if (Math.Abs(y1) >= int.MaxValue) y1 = y1 / 10;
+            if (Math.Abs(x2) >= int.MaxValue) x2 = x2 / 10;
+            if (Math.Abs(y2) >= int.MaxValue) y2 = y2 / 10;
+			
+			if((x1 != x2) || (y1 != y2))
+				return string.Format("drawfillbox({0}, {1}, {2}, {3}, {4})", x1, y1, x2, y2, c);
+			else
+				return "";
         }
 
-        static string drawOval(int x, int y, int rx, int ry, string c)
+        static string drawOval(long x, long y, long rx, long ry, string c)
         {
+            if (Math.Abs(x) >= int.MaxValue) x = x / 10;
+            if (Math.Abs(y) >= int.MaxValue) y = y / 10;
+            if (Math.Abs(rx) >= int.MaxValue) rx = rx / 10;
+            if (Math.Abs(ry) >= int.MaxValue) ry = ry / 10;
+
             return string.Format("drawoval({0}, {1}, {2}, {3}, {4})", x, y, rx, ry, c);
         }
 
-        static string drawFillOval(int x, int y, int rx, int ry, string c)
+        static string drawFillOval(long x, long y, long rx, long ry, string c)
         {
-            return string.Format("drawfilloval({0}, {1}, {2}, {3}, {4})", x, y, rx, ry, c);
+            if (Math.Abs(x) >= int.MaxValue) x = x / 10;
+            if (Math.Abs(y) >= int.MaxValue) y = y / 10;
+            if (Math.Abs(rx) >= int.MaxValue) rx = rx / 10;
+            if (Math.Abs(ry) >= int.MaxValue) ry = ry / 10;
+			
+			return string.Format("drawfilloval({0}, {1}, {2}, {3}, {4})", x, y, rx, ry, c);
         }
 
-        static string drawArc(int x, int y, int xRad, int yRad, int from, int to, string c)
+        static string drawArc(long x, long y, long xRad, long yRad, long from, long to, string c)
         {
-            return string.Format("drawarc({0}, {1}, {2}, {3}, {4}, {5}, {6})", x, y, xRad, yRad, from, to, c);
+            if (Math.Abs(x) >= int.MaxValue) x = x / 10;
+            if (Math.Abs(y) >= int.MaxValue) y = y / 10;
+            if (Math.Abs(xRad) >= int.MaxValue) xRad = xRad / 10;
+            if (Math.Abs(yRad) >= int.MaxValue) yRad = yRad / 10;
+            if (Math.Abs(from) >= int.MaxValue) from = from / 10;
+            if (Math.Abs(to) >= int.MaxValue) to = to / 10;
+			
+			if((xRad != 0) && (yRad != 0) && (from != to))
+				return string.Format("drawarc({0}, {1}, {2}, {3}, {4}, {5}, {6})", x, y, xRad, yRad, from, to, c);
+			return "";
         }
 
         #endregion
